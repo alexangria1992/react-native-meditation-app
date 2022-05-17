@@ -1,11 +1,23 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import React, {useState} from 'react';
 import {colors} from '../../config/colors';
 import {SecondaryButton} from '../../components/buttons/SecondaryButton';
-import {PrimaryInput} from '../../components/forms/PrimaryInput';
 import {PrimaryButton} from '../../components/buttons/PrimaryButton';
+import {PrimaryInput} from '../../components/forms/PrimaryInput';
+import {SecondaryInput} from '../../components/forms/SecondaryInput';
 
-export const Login = () => {
+export const SignUp = () => {
+  const [userName, setuserName] = useState('alex');
+  const [email, setEmail] = useState('alex040892@gmail.com');
+  const [password, setPassword] = useState('1234567');
+
   return (
     <View style={styles.container}>
       <Image
@@ -24,12 +36,13 @@ export const Login = () => {
         style={styles.vector4}
         source={require('../../../assets/images/vector4.png')}
       />
+
       <View style={styles.contentContainer}>
         <Image
           style={styles.back}
           source={require('../../../assets/images/back.png')}
         />
-        <Text style={styles.heading}>Welcome Back!</Text>
+        <Text style={styles.heading}>Create your Account</Text>
         <View style={styles.btnWrapper}>
           <View style={styles.btnItemWrapper}>
             <SecondaryButton
@@ -50,22 +63,35 @@ export const Login = () => {
         </View>
         <Text style={styles.or}>OR LOG IN WITH EMAIL</Text>
         <View style={styles.inputItem}>
-          <PrimaryInput placeHolder={'Email Address'} />
+          <PrimaryInput
+            placeHolder={'User Name'}
+            isValid={true}
+            value={userName}
+          />
         </View>
         <View style={styles.inputItem}>
-          <PrimaryInput placeHolder={'Password'} />
+          <PrimaryInput
+            value={email}
+            placeHolder={'Email Address'}
+            isValid={true}
+          />
         </View>
-        <View style={styles.loginBtnWrapper}>
-          <PrimaryButton label={'LOG IN'} />
+        <View style={styles.inputItem}>
+          <SecondaryInput value={password} placeHolder={'Password'} />
         </View>
-        <Text style={styles.forgotPassword}>Forgot Password?</Text>
-      </View>
-
-      <View style={styles.footerWrapper}>
-        <Text style={styles.footerText}>
-          <Text style={styles.footerText1}>ALREADY HAVE AN ACCOUNT? </Text>
-          <Text style={styles.footerText2}>SIGN UP</Text>
-        </Text>
+        <View style={styles.privacyPolicyCheckWrapper}>
+          <TouchableOpacity style={styles.privacyPolicyLabelWrapper}>
+            <Text style={styles.subTitle}>I have read the </Text>
+            <Text style={styles.link}>privacy policy</Text>
+          </TouchableOpacity>
+          <Image
+            style={styles.checkBox}
+            source={require('../../../assets/images/checkbox.png')}
+          />
+        </View>
+        <View style={styles.getStartedbtnItemWrapper}>
+          <PrimaryButton label={'GET STARTED'} />
+        </View>
       </View>
     </View>
   );
@@ -76,6 +102,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     padding: 20,
+    marginTop: -50,
   },
   vector1: {
     position: 'absolute',
@@ -97,6 +124,7 @@ export const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    // marginTop: -10,
   },
   back: {
     marginTop: 50,
@@ -117,7 +145,7 @@ export const styles = StyleSheet.create({
   },
   or: {
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: 5,
     fontFamily: 'HelveticaNeue',
     fontSize: 14,
     fontWeight: '700',
@@ -128,30 +156,31 @@ export const styles = StyleSheet.create({
   inputItem: {
     marginBottom: 20,
   },
-  loginBtnWrapper: {
-    marginTop: 10,
+  checkBox: {
+    width: 24,
+    height: 24,
   },
-  forgotPassword: {
+  privacyPolicyCheckWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  subTitle: {
     fontFamily: 'HelveticaNeue',
-    fontWeight: '400',
     fontSize: 14,
-    textAlign: 'center',
-    marginTop: 5,
-  },
-  footerText: {
-    fontFamily: 'HelveticaNeue',
-    fontWeight: '400',
-    fontSize: 14,
-  },
-  footerText1: {
+    fontWeight: '700',
     color: colors.gray,
   },
-  footerText2: {
+  link: {
+    fontFamily: 'HelveticaNeue',
+    fontSize: 14,
+    fontWeight: '700',
     color: colors.primary,
   },
-  footerWrapper: {
-    position: 'absolute',
-    bottom: 10,
-    alignSelf: 'center',
+  privacyPolicyLabelWrapper: {
+    flexDirection: 'row',
+  },
+  getStartedbtnItemWrapper: {
+    marginTop: 20,
   },
 });
